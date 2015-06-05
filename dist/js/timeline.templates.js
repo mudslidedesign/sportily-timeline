@@ -120,8 +120,6 @@ angular.module("templates/sportily/timeline/timeline.html", []).run(["$templateC
   $templateCache.put("templates/sportily/timeline/timeline.html",
     "<ng-include src=\"'templates/sportily/timeline/scores.html'\"></ng-include>\n" +
     "\n" +
-    "<h3>Timeline</h3>\n" +
-    "\n" +
     "<ul class=\"timeline\">\n" +
     "    <li class=\"timeline__item\" ng-if=\"fixture.state.inProgress\">\n" +
     "        <div class=\"event event--flow\">{{ fixture.state.gameTime | gameTime }}</div>\n" +
