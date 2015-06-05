@@ -1,13 +1,13 @@
 (function() {
   var module;
 
-  module = angular.module('sportily-timeline', ['timeline.fixtures.service', 'timeline.config', 'timeline.filters', 'restangular', 'sportily-timeline-templates']);
+  module = angular.module('sportily.timeline', ['restangular', 'sportily.timeline.config', 'sportily.timeline.filters', 'sportily.timeline.fixture.service', 'sportily.timeline.templates']);
 
   module.directive('sportilyTimeline', function() {
     return {
       restrict: 'E',
       controller: 'SportilyTimelineCtrl',
-      templateUrl: 'templates/timeline.html',
+      templateUrl: 'templates/sportily.timeline.html',
       scope: {
         competition_id: '=competitionId',
         organisation_id: '=organisationId',
@@ -42,13 +42,16 @@
 (function() {
   var module;
 
-  module = angular.module('timeline.config', ['restangular', 'toaster', 'config']);
+  module = angular.module('sportily.timeline.config', ['restangular']);
 
-  module.config(function(RestangularProvider, config) {
+  module.config(function(RestangularProvider) {
     var generateLookup;
-    RestangularProvider.setBaseUrl(config.api_url);
+    RestangularProvider.setBaseUrl('http://oauth.sporti.ly');
     RestangularProvider.setDefaultHeaders({
       Authorization: 'Bearer ' + window.localStorage.getItem('access_token')
+    });
+    RestangularProvider.setErrorInterceptor(function(response) {
+      return console.error(response);
     });
     RestangularProvider.addResponseInterceptor(function(data, operation) {
       var result;
@@ -72,21 +75,12 @@
     };
   });
 
-  module.run(function(Restangular, toaster, $rootScope) {
-    Restangular.setErrorInterceptor(function(response) {
-      return toaster.error(response.data.error_description);
-    });
-    return $rootScope.$on('$stateChangeSuccess', function() {
-      return toaster.clear();
-    });
-  });
-
 }).call(this);
 
 (function() {
   var module;
 
-  module = angular.module('timeline.filters', []);
+  module = angular.module('sportily.timeline.filters', []);
 
   module.filter('person', function() {
     return function(input) {
@@ -135,35 +129,13 @@
     };
   });
 
-  module.filter('fileIcon', function() {
-    return function(input) {
-      switch (input.mime) {
-        case 'application/pdf':
-          return 'fa-file-pdf-o';
-        case 'application/zip':
-        case 'application/gzip':
-          return 'fa-file-archive-o';
-        case 'image/gif':
-        case 'image/jpeg':
-        case 'image/png':
-          return 'fa-file-image-o';
-        case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-        case 'application/vnd.openxmlformats-officedocument.presentationml.slideshow':
-        case 'application/vnd.ms-powerpoint':
-          return 'fa-file-powerpoint-o';
-        default:
-          return 'fa-file-o';
-      }
-    };
-  });
-
 }).call(this);
 
 (function() {
   var Fixture, FixtureService, module,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  module = angular.module('timeline.fixtures.service', ['restangular']);
+  module = angular.module('sportily.timeline.fixture.service', ['restangular']);
 
   Fixture = (function() {
     function Fixture(q, interval, details1, events1, participants1) {

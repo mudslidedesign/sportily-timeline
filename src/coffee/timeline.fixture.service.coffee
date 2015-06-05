@@ -1,4 +1,4 @@
-module = angular.module 'timeline.fixtures.service',  [ 'restangular' ]
+module = angular.module 'sportily.timeline.fixture.service',  [ 'restangular' ]
 
 #
 # The fixture model object provides a convenient mechanism for working with

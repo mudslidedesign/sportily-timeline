@@ -1,4 +1,5 @@
-module = angular.module 'timeline.filters', [ ]
+module = angular.module 'sportily.timeline.filters', [ ]
+
 
 module.filter 'person', ->
     (input) ->
@@ -32,12 +33,3 @@ module.filter 'minutes', ->
 module.filter 'reverse', ->
     (input) ->
         input.slice().reverse() if input
-
-module.filter 'fileIcon', ->
-    (input) ->
-        switch input.mime
-            when 'application/pdf' then 'fa-file-pdf-o'
-            when 'application/zip', 'application/gzip' then 'fa-file-archive-o'
-            when 'image/gif', 'image/jpeg', 'image/png' then 'fa-file-image-o'
-            when 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/vnd.ms-powerpoint' then 'fa-file-powerpoint-o'
-            else 'fa-file-o'
