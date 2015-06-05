@@ -118,7 +118,7 @@ angular.module("templates/sportily/timeline/scores.html", []).run(["$templateCac
 
 angular.module("templates/sportily/timeline/timeline.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sportily/timeline/timeline.html",
-    "<ng-include src=\"'templates/scores.html'\"></ng-include>\n" +
+    "<ng-include src=\"'templates/sportily/timeline/scores.html'\"></ng-include>\n" +
     "\n" +
     "<h3>Timeline</h3>\n" +
     "\n" +
@@ -128,7 +128,7 @@ angular.module("templates/sportily/timeline/timeline.html", []).run(["$templateC
     "    </li>\n" +
     "    <li class=\"timeline__item\"\n" +
     "        ng-repeat=\"event in fixture.events | reverse\"\n" +
-    "        ng-include=\"'templates/' + event.type + '.html'\">\n" +
+    "        ng-include=\"'templates/sportily/timeline/' + event.type + '.html'\">\n" +
     "    </li>\n" +
     "</ul>\n" +
     "");
