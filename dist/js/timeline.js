@@ -7,7 +7,7 @@
     return {
       restrict: 'E',
       controller: 'SportilyTimelineCtrl',
-      templateUrl: 'templates/sportily.timeline.html',
+      templateUrl: 'templates/sportily/timeline/timeline.html',
       scope: {
         competition_id: '=competitionId',
         organisation_id: '=organisationId',
