@@ -1,0 +1,17 @@
+<div class="event event--foul"
+    ng-class="{ 'event--home' : event.entry_id == fixture.details.home_entry.id }">
+    <div class="event__time">{{:: event.game_time | gameTime }}</div>
+    <div class="event__icon"><i class="fa fa-thumbs-down"></i></div>
+    <div class="event__panel">
+        <div class="event__description">
+            Foul committed by {{:: fixture.participants.lookup[event.participant_id].name | person }}
+        </div>
+        <div class="event__aux" ng-if="event.penalty_seconds">
+            Awarded {{:: event.penalty_seconds / 60 }} penalty minutes
+        </div>
+        <div class="event__notes" ng-if="event.notes">
+            “{{:: event.notes }}”
+        </div>
+    </div>
+    <div delete-event="event" fixture="fixture" name="Foul committed by {{:: fixture.participants.lookup[event.participant_id].name | person }}"></div>
+</div>

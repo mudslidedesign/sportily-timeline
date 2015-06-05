@@ -1,0 +1,18 @@
+<div class="event event--goal"
+    ng-class="{ 'event--home' : event.entry_id == fixture.details.home_entry.id }">
+    <div class="event__icon"><i class="fa fa-star"></i></div>
+    <div class="event__panel">
+        <div class="event__time">{{:: event.game_time | gameTime }}</div>
+        <div class="event__description">
+            Goal! Scored by {{:: fixture.participants.lookup[event.participant_id].name | person }}.
+        </div>
+        <div class="event__aux" ng-if="event.children">
+            Assisted by
+            <span ng-repeat="child in event.children">{{ $first ? '' : $last ? ' and ' : ', ' }}{{:: fixture.participants.lookup[child.participant_id].name | person }}</span>
+        </div>
+        <div class="event__notes" ng-if="event.notes">
+            “{{:: event.notes }}”
+        </div>
+    </div>
+    <div delete-event="event" fixture="fixture" name="Goal! Scored by {{:: fixture.participants.lookup[event.participant_id].name | person }}"></div>
+</div>
