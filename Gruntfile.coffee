@@ -6,8 +6,8 @@ module.exports = (grunt) ->
         # add browser prefixes as necessary.
         autoprefixer:
             dist:
-                src: 'public/css/app.css'
-                dest: 'public/css/app.css'
+                src: 'dist/css/app.css'
+                dest: 'dist/css/app.css'
 
         # compile coffeescript to raw javascript.
         coffee:
@@ -16,15 +16,30 @@ module.exports = (grunt) ->
                 flatten: true
                 cwd: 'src/coffee'
                 src: [ '*.coffee' ]
-                dest: 'public/js'
+                dest: 'dist/js'
                 ext: '.js'
 
+        html2js:
+            dist:
+                src: 'src/templates/**/*.html'
+                dest: 'dist/timeline-templates.js'
+                module: 'sportily-timeline-templates'
+
+        # build the config module.
+        ngconstant:
+            options:
+                name: 'config'
+                dest: 'dist/js/config.js'
+            dev:
+                constants: 'src/config/dev.json'
+            prod:
+                constants: 'src/config/prod.json'
 
         # compile sass/scss.
         sass:
             dist:
                 files:
-                    'public/css/app.css': 'src/scss/app.scss'
+                    'dist/css/app.css': 'src/scss/app.scss'
 
         # watch the source code for changes, trigger actions, then push built files to the server.
         watch:
@@ -35,6 +50,10 @@ module.exports = (grunt) ->
             sass:
                 files: [ 'src/scss/**/*.scss' ]
                 tasks: [ 'sass', 'autoprefixer' ]
+
+            ngconstant:
+                files: [ 'src/config/*.json' ]
+                tasks: [ 'ngconstant:dev' ]
 
             livereload:
                 files: [ '/**/*.{js,css,html}' ]
@@ -47,11 +66,23 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-coffee'
     grunt.loadNpmTasks 'grunt-contrib-sass'
     grunt.loadNpmTasks 'grunt-contrib-watch'
+    grunt.loadNpmTasks 'grunt-ng-constant'
+    grunt.loadNpmTasks 'grunt-html2js'
 
     # configure higher level grunt tasks.
     grunt.registerTask 'default', [
         'sass'
         'autoprefixer'
         'coffee'
+        'html2js'
+        'ngconstant:dev'
         'watch'
+    ]
+
+    grunt.registerTask 'prod', [
+        'sass'
+        'autoprefixer'
+        'coffee'
+        'html2js'
+        'ngconstant:prod'
     ]

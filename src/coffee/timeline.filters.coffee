@@ -1,4 +1,4 @@
-module = angular.module 'app.filters', [ ]
+module = angular.module 'timeline.filters', [ ]
 
 module.filter 'person', ->
     (input) ->
@@ -31,7 +31,7 @@ module.filter 'minutes', ->
 
 module.filter 'reverse', ->
     (input) ->
-        input.slice().reverse()
+        input.slice().reverse() if input
 
 module.filter 'fileIcon', ->
     (input) ->

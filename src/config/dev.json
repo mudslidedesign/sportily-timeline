@@ -1,0 +1,8 @@
+{
+    "config": {
+        "api_url": "http://localhost:9000",
+        "features": {
+            "realtime_input": true
+        }
+    }
+}

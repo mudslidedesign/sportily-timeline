@@ -1,3 +1,5 @@
+<ng-include src="'templates/scores.html'"></ng-include>
+
 <h3>Timeline</h3>
 
 <ul class="timeline">
@@ -6,6 +8,6 @@
     </li>
     <li class="timeline__item"
         ng-repeat="event in fixture.events | reverse"
-        ng-include="'/components/sportily-timeline/public/views/fixtures.view.timeline.' + event.type + '.html'">
+        ng-include="'templates/' + event.type + '.html'">
     </li>
 </ul>
