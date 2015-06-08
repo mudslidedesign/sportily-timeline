@@ -46,3 +46,25 @@ of the fixture to be displayed.
     <!-- here you may use the `sportily-scores` and `sportily-timeline` directives. -->
 </div>
 ```
+
+### Scores
+
+Inside of the `sportily-fixture` directive, use can display the current game
+score using the `sportily-scores` directive, like so:
+
+```html
+<div ng-app="myapp" sportily-fixture="[FIXTURE-ID]">
+    <sportily-scores></sportily-scores>
+</div>
+```
+
+### Timeline
+
+Inside of the `sportily-fixture` directive, use can display the current game
+score using the `sportily-timeline` directive, like so:
+
+```html
+<div ng-app="myapp" sportily-fixture="[FIXTURE-ID]">
+    <sportily-timeline></sportily-timeline>
+</div>
+```
