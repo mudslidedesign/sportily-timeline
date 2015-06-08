@@ -6,7 +6,7 @@ module = angular.module 'sportily.fixture', [
     'sportily.fixture.templates'
 ]
 
-module.directive 'sportilyFixture', (FixtureService) ->
+module.directive 'sportilyFixture', [ 'FixtureService', (FixtureService) ->
     restrict: 'A'
     scope: true
 
@@ -15,14 +15,16 @@ module.directive 'sportilyFixture', (FixtureService) ->
             FixtureService.get(attrs.sportilyFixture).then (data) ->
                 scope.fixture = data;
 
+]
+
 
 module.directive 'sportilyTimeline', ->
     restrict: 'E'
     require: '^sportilyFixture'
-    templateUrl: 'templates/sportily/timeline/timeline.html'
+    templateUrl: 'templates/sportily/fixture/timeline.html'
 
 
 module.directive 'sportilyScores', ->
     restrict: 'E'
     require: '^sportilyFixture'
-    templateUrl: 'templates/sportily/timeline/scores.html'
+    templateUrl: 'templates/sportily/fixture/scores.html'

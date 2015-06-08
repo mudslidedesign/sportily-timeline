@@ -3,25 +3,27 @@
 
   module = angular.module('sportily.fixture', ['restangular', 'sportily.fixture.config', 'sportily.fixture.filters', 'sportily.fixture.service', 'sportily.fixture.templates']);
 
-  module.directive('sportilyFixture', function(FixtureService) {
-    return {
-      restrict: 'A',
-      scope: true,
-      link: function(scope, element, attrs, ctrl) {
-        if (attrs.sportilyFixture) {
-          return FixtureService.get(attrs.sportilyFixture).then(function(data) {
-            return scope.fixture = data;
-          });
+  module.directive('sportilyFixture', [
+    'FixtureService', function(FixtureService) {
+      return {
+        restrict: 'A',
+        scope: true,
+        link: function(scope, element, attrs, ctrl) {
+          if (attrs.sportilyFixture) {
+            return FixtureService.get(attrs.sportilyFixture).then(function(data) {
+              return scope.fixture = data;
+            });
+          }
         }
-      }
-    };
-  });
+      };
+    }
+  ]);
 
   module.directive('sportilyTimeline', function() {
     return {
       restrict: 'E',
       require: '^sportilyFixture',
-      templateUrl: 'templates/sportily/timeline/timeline.html'
+      templateUrl: 'templates/sportily/fixture/timeline.html'
     };
   });
 
@@ -29,7 +31,7 @@
     return {
       restrict: 'E',
       require: '^sportilyFixture',
-      templateUrl: 'templates/sportily/timeline/scores.html'
+      templateUrl: 'templates/sportily/fixture/scores.html'
     };
   });
 
@@ -40,36 +42,38 @@
 
   module = angular.module('sportily.fixture.config', ['restangular']);
 
-  module.config(function(RestangularProvider) {
-    var generateLookup;
-    RestangularProvider.setBaseUrl('http://oauth.sporti.ly');
-    RestangularProvider.setDefaultHeaders({
-      Authorization: 'Bearer ' + window.localStorage.getItem('access_token')
-    });
-    RestangularProvider.setErrorInterceptor(function(response) {
-      return console.error(response);
-    });
-    RestangularProvider.addResponseInterceptor(function(data, operation) {
-      var result;
-      result = null;
-      if (operation === 'getList') {
-        result = data.data;
-        result.lookup = generateLookup(data.data);
-      } else {
-        result = data;
-      }
-      return result;
-    });
-    return generateLookup = function(items) {
-      var i, item, len, result;
-      result = {};
-      for (i = 0, len = items.length; i < len; i++) {
-        item = items[i];
-        result[item.id] = item;
-      }
-      return result;
-    };
-  });
+  module.config([
+    'RestangularProvider', function(RestangularProvider) {
+      var generateLookup;
+      RestangularProvider.setBaseUrl('http://oauth.sporti.ly');
+      RestangularProvider.setDefaultHeaders({
+        Authorization: 'Bearer ' + window.localStorage.getItem('access_token')
+      });
+      RestangularProvider.setErrorInterceptor(function(response) {
+        return console.error(response);
+      });
+      RestangularProvider.addResponseInterceptor(function(data, operation) {
+        var result;
+        result = null;
+        if (operation === 'getList') {
+          result = data.data;
+          result.lookup = generateLookup(data.data);
+        } else {
+          result = data;
+        }
+        return result;
+      });
+      return generateLookup = function(items) {
+        var i, item, len, result;
+        result = {};
+        for (i = 0, len = items.length; i < len; i++) {
+          item = items[i];
+          result[item.id] = item;
+        }
+        return result;
+      };
+    }
+  ]);
 
 }).call(this);
 

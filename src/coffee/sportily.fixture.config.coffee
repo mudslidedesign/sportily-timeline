@@ -1,7 +1,7 @@
 module = angular.module 'sportily.fixture.config', [ 'restangular' ]
 
 
-module.config (RestangularProvider) ->
+module.config [ 'RestangularProvider', (RestangularProvider) ->
     RestangularProvider.setBaseUrl 'http://oauth.sporti.ly'
     RestangularProvider.setDefaultHeaders Authorization: 'Bearer ' + window.localStorage.getItem 'access_token'
 
@@ -24,3 +24,5 @@ module.config (RestangularProvider) ->
         result = {}
         result[item.id] = item for item in items
         result
+
+]
