@@ -1,8 +1,7 @@
-module = angular.module 'sportily.timeline.config', [ 'restangular' ]
+module = angular.module 'sportily.fixture.config', [ 'restangular' ]
 
 
 module.config (RestangularProvider) ->
-
     RestangularProvider.setBaseUrl 'http://oauth.sporti.ly'
     RestangularProvider.setDefaultHeaders Authorization: 'Bearer ' + window.localStorage.getItem 'access_token'
 

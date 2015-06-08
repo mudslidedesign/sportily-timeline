@@ -1,4 +1,4 @@
-module = angular.module 'sportily.timeline.filters', [ ]
+module = angular.module 'sportily.fixture.filters', [ ]
 
 
 module.filter 'person', ->

@@ -1,40 +1,36 @@
 (function() {
   var module;
 
-  module = angular.module('sportily.timeline', ['restangular', 'sportily.timeline.config', 'sportily.timeline.filters', 'sportily.timeline.fixture.service', 'sportily.timeline.templates']);
+  module = angular.module('sportily.fixture', ['restangular', 'sportily.fixture.config', 'sportily.fixture.filters', 'sportily.fixture.service', 'sportily.fixture.templates']);
 
-  module.directive('sportilyTimeline', function() {
+  module.directive('sportilyFixture', function(FixtureService) {
     return {
-      restrict: 'E',
-      controller: 'SportilyTimelineCtrl',
-      templateUrl: 'templates/sportily/timeline/timeline.html',
-      scope: {
-        competition_id: '=competitionId',
-        organisation_id: '=organisationId',
-        fixture_id: '=fixtureId'
+      restrict: 'A',
+      scope: true,
+      link: function(scope, element, attrs, ctrl) {
+        if (attrs.sportilyFixture) {
+          return FixtureService.get(attrs.sportilyFixture).then(function(data) {
+            return scope.fixture = data;
+          });
+        }
       }
     };
   });
 
-  module.controller('SportilyTimelineCtrl', function($scope, FixtureService, Restangular) {
-    FixtureService.get($scope.fixture_id).then(function(data) {
-      return $scope.fixture = data;
-    });
-    Restangular.all('divisions').getList({
-      competition_id: $scope.competition_id
-    }).then(function(data) {
-      return $scope.divisions = data;
-    });
-    Restangular.all('division-entries').getList({
-      competition_id: $scope.competition_id
-    }).then(function(data) {
-      return $scope.entries = data;
-    });
-    return Restangular.all('venues').getList({
-      organisation_id: $scope.organisation_id
-    }).then(function(data) {
-      return $scope.venue = data;
-    });
+  module.directive('sportilyTimeline', function() {
+    return {
+      restrict: 'E',
+      require: '^sportilyFixture',
+      templateUrl: 'templates/sportily/timeline/timeline.html'
+    };
+  });
+
+  module.directive('sportilyScores', function() {
+    return {
+      restrict: 'E',
+      require: '^sportilyFixture',
+      templateUrl: 'templates/sportily/timeline/scores.html'
+    };
   });
 
 }).call(this);
@@ -42,7 +38,7 @@
 (function() {
   var module;
 
-  module = angular.module('sportily.timeline.config', ['restangular']);
+  module = angular.module('sportily.fixture.config', ['restangular']);
 
   module.config(function(RestangularProvider) {
     var generateLookup;
@@ -80,7 +76,7 @@
 (function() {
   var module;
 
-  module = angular.module('sportily.timeline.filters', []);
+  module = angular.module('sportily.fixture.filters', []);
 
   module.filter('person', function() {
     return function(input) {
@@ -135,7 +131,7 @@
   var Fixture, FixtureService, module,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  module = angular.module('sportily.timeline.fixture.service', ['restangular']);
+  module = angular.module('sportily.fixture.service', ['restangular']);
 
   Fixture = (function() {
     function Fixture(q, interval, details1, events1, participants1) {
