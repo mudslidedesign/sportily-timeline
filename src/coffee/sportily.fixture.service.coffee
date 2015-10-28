@@ -254,7 +254,7 @@ class FixtureService
             new Fixture @q, @interval, details, events, participants
 
     _details: (id) ->
-        @Fixtures.get id
+        @Fixtures.one(id).get()
         #@restangular.one('fixtures', id).get()
 
     _events: (id) ->

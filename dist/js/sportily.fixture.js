@@ -416,7 +416,7 @@
     };
 
     FixtureService.prototype._details = function(id) {
-      return this.Fixtures.get(id);
+      return this.Fixtures.one(id).get();
     };
 
     FixtureService.prototype._events = function(id) {
