@@ -1,4 +1,6 @@
-module = angular.module 'sportily.fixture.service',  [ 'restangular' ]
+module = angular.module 'sportily.fixture.service',  [
+    'sportily.api'
+]
 
 #
 # The fixture model object provides a convenient mechanism for working with
@@ -239,7 +241,7 @@ class Fixture
 #
 class FixtureService
 
-    constructor: (@restangular, @q, @interval) ->
+    constructor: (@q, @interval, @Fixtures, @Events, @Participants) ->
 
     get: (id) ->
         promises =
@@ -252,14 +254,24 @@ class FixtureService
             new Fixture @q, @interval, details, events, participants
 
     _details: (id) ->
-        @restangular.one('fixtures', id).get()
+        @Fixtures.get id
+        #@restangular.one('fixtures', id).get()
 
     _events: (id) ->
-        @restangular.all('events').getList fixture_id: id
+        @Events.getList fixture_id: id
+        #@restangular.all('events').getList fixture_id: id
 
     _participants: (id) ->
-        @restangular.all('participants').getList fixture_id: id
+        @Participants.getList fixture_id: id
+        #@restangular.all('participants').getList fixture_id: id
 
 
 # expose the fixture service as an angular service.
-module.service 'FixtureService', [ 'Restangular', '$q', '$interval', FixtureService ]
+module.service 'FixtureService', [
+    '$q'
+    '$interval'
+    'Fixtures'
+    'Events'
+    'Participants'
+    FixtureService
+]
