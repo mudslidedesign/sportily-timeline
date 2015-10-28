@@ -1,6 +1,5 @@
 module = angular.module 'sportily.fixture', [
     'restangular'
-    'sportily.fixture.config'
     'sportily.fixture.filters'
     'sportily.fixture.service'
     'sportily.fixture.templates'

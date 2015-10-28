@@ -1,7 +1,7 @@
 (function() {
   var module;
 
-  module = angular.module('sportily.fixture', ['restangular', 'sportily.fixture.config', 'sportily.fixture.filters', 'sportily.fixture.service', 'sportily.fixture.templates']);
+  module = angular.module('sportily.fixture', ['restangular', 'sportily.fixture.filters', 'sportily.fixture.service', 'sportily.fixture.templates']);
 
   module.directive('sportilyFixture', [
     'FixtureService', function(FixtureService) {
@@ -34,46 +34,6 @@
       templateUrl: 'templates/sportily/fixture/scores.html'
     };
   });
-
-}).call(this);
-
-(function() {
-  var module;
-
-  module = angular.module('sportily.fixture.config', ['restangular']);
-
-  module.config([
-    'RestangularProvider', function(RestangularProvider) {
-      var generateLookup;
-      RestangularProvider.setBaseUrl('http://oauth.sporti.ly');
-      RestangularProvider.setDefaultHeaders({
-        Authorization: 'Bearer ' + window.localStorage.getItem('access_token')
-      });
-      RestangularProvider.setErrorInterceptor(function(response) {
-        return console.error(response);
-      });
-      RestangularProvider.addResponseInterceptor(function(data, operation) {
-        var result;
-        result = null;
-        if (operation === 'getList') {
-          result = data.data;
-          result.lookup = generateLookup(data.data);
-        } else {
-          result = data;
-        }
-        return result;
-      });
-      return generateLookup = function(items) {
-        var i, item, len, result;
-        result = {};
-        for (i = 0, len = items.length; i < len; i++) {
-          item = items[i];
-          result[item.id] = item;
-        }
-        return result;
-      };
-    }
-  ]);
 
 }).call(this);
 
@@ -135,7 +95,7 @@
   var Fixture, FixtureService, module,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  module = angular.module('sportily.fixture.service', ['restangular']);
+  module = angular.module('sportily.fixture.service', ['sportily.api']);
 
   Fixture = (function() {
     function Fixture(q, interval, details1, events1, participants1) {
@@ -431,10 +391,12 @@
   })();
 
   FixtureService = (function() {
-    function FixtureService(restangular, q, interval) {
-      this.restangular = restangular;
+    function FixtureService(q, interval, Fixtures, Events, Participants) {
       this.q = q;
       this.interval = interval;
+      this.Fixtures = Fixtures;
+      this.Events = Events;
+      this.Participants = Participants;
     }
 
     FixtureService.prototype.get = function(id) {
@@ -454,17 +416,17 @@
     };
 
     FixtureService.prototype._details = function(id) {
-      return this.restangular.one('fixtures', id).get();
+      return this.Fixtures.get(id);
     };
 
     FixtureService.prototype._events = function(id) {
-      return this.restangular.all('events').getList({
+      return this.Events.getList({
         fixture_id: id
       });
     };
 
     FixtureService.prototype._participants = function(id) {
-      return this.restangular.all('participants').getList({
+      return this.Participants.getList({
         fixture_id: id
       });
     };
@@ -473,6 +435,6 @@
 
   })();
 
-  module.service('FixtureService', ['Restangular', '$q', '$interval', FixtureService]);
+  module.service('FixtureService', ['$q', '$interval', 'Fixtures', 'Events', 'Participants', FixtureService]);
 
 }).call(this);
