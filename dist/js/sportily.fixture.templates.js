@@ -3,9 +3,9 @@ angular.module('sportily.fixture.templates', ['templates/sportily/fixture/scores
 angular.module("templates/sportily/fixture/scores.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sportily/fixture/scores.html",
     "<span class=\"sportily-scores\">\n" +
-    "    <span class=\"sportily-scores__home\">{{ fixture.details.home_entry.score }}</span>\n" +
+    "    <span class=\"sportily-scores__home\">{{ fixture.details.home_entry.result.score }}</span>\n" +
     "    <span class=\"sportily-scores__vs\">–</span>\n" +
-    "    <span class=\"sportily-scores__home\">{{ fixture.details.away_entry.score }}</span>\n" +
+    "    <span class=\"sportily-scores__home\">{{ fixture.details.away_entry.result.score }}</span>\n" +
     "<span>\n" +
     "");
 }]);
