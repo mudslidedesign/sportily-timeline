@@ -1,5 +1,5 @@
 <div class="event event--own_goal"
-    ng-class="{ 'event--home' : event.entry_id != fixture.details.home_entry.id }">
+    ng-class="{ 'event--home' : event.entry_id != fixture.details.home_entry.division_entry_id }">
     <div class="event__icon"><i class="fa fa-star"></i></div>
     <div class="event__panel">
         <div class="event__time">{{:: event.game_time | gameTime }}</div>
