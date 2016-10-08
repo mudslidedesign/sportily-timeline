@@ -32,7 +32,7 @@ angular.module("templates/sportily/fixture/timeline/assist.html", []).run(["$tem
 angular.module("templates/sportily/fixture/timeline/foul.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/foul.html",
     "<div class=\"event event--foul\"\n" +
-    "    ng-class=\"{ 'event--home' : event.entry_id == fixture.details.home_entry.id }\">\n" +
+    "    ng-class=\"{ 'event--home' : event.entry_id == fixture.details.home_entry.division_entry_id }\">\n" +
     "    <div class=\"event__icon\"><i class=\"fa fa-thumbs-down\"></i></div>\n" +
     "    <div class=\"event__panel\">\n" +
     "        <div class=\"event__time\">{{:: event.game_time | gameTime }}</div>\n" +
@@ -76,7 +76,7 @@ angular.module("templates/sportily/fixture/timeline/game_start.html", []).run(["
 angular.module("templates/sportily/fixture/timeline/goal.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/goal.html",
     "<div class=\"event event--goal\"\n" +
-    "    ng-class=\"{ 'event--home' : event.entry_id == fixture.details.home_entry.id }\">\n" +
+    "    ng-class=\"{ 'event--home' : event.entry_id == fixture.details.home_entry.division_entry_id }\">\n" +
     "    <div class=\"event__icon\"><i class=\"fa fa-star\"></i></div>\n" +
     "    <div class=\"event__panel\">\n" +
     "        <div class=\"event__time\">{{:: event.game_time | gameTime }}</div>\n" +
@@ -99,7 +99,7 @@ angular.module("templates/sportily/fixture/timeline/goal.html", []).run(["$templ
 angular.module("templates/sportily/fixture/timeline/own_goal.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/own_goal.html",
     "<div class=\"event event--own_goal\"\n" +
-    "    ng-class=\"{ 'event--home' : event.entry_id != fixture.details.home_entry.id }\">\n" +
+    "    ng-class=\"{ 'event--home' : event.entry_id != fixture.details.home_entry.division_entry_id }\">\n" +
     "    <div class=\"event__icon\"><i class=\"fa fa-star\"></i></div>\n" +
     "    <div class=\"event__panel\">\n" +
     "        <div class=\"event__time\">{{:: event.game_time | gameTime }}</div>\n" +
