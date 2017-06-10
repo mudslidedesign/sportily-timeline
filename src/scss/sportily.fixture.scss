@@ -87,3 +87,36 @@
 
     }
 }
+
+.fixturehdr {
+    position: relative;
+
+    &::before {
+        content: ' ';
+    }
+
+    small {
+        font-size: inherit;
+        color: #8f8f8f;
+    }
+
+    &__home, &__away {
+        width: 50%;
+        position: absolute;
+        top: 0;
+    }
+    &__home {
+        left: 0;
+    }
+    &__away {
+        right: 0;
+        text-align: right;
+    }
+    &__scores {
+        position: absolute;
+        width: 8rem;
+        left: 50%;
+        margin-left: -4rem;
+        text-align: center;
+    }
+}
