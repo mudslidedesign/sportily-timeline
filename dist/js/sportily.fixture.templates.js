@@ -1,6 +1,6 @@
 angular.module('sportily.fixture.templates', ['templates/sportily/fixture/scores.html', 'templates/sportily/fixture/timeline.html', 'templates/sportily/fixture/timeline/assist.html', 'templates/sportily/fixture/timeline/foul.html', 'templates/sportily/fixture/timeline/game_finish.html', 'templates/sportily/fixture/timeline/game_pause.html', 'templates/sportily/fixture/timeline/game_resume.html', 'templates/sportily/fixture/timeline/game_start.html', 'templates/sportily/fixture/timeline/goal.html', 'templates/sportily/fixture/timeline/own_goal.html']);
 
-angular.module("templates/sportily/fixture/scores.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/scores.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/scores.html",
     "<span class=\"sportily-scores\">\n" +
     "    <span class=\"sportily-scores__home\">{{ fixture.details.home_entry.result.score }}</span>\n" +
@@ -10,7 +10,7 @@ angular.module("templates/sportily/fixture/scores.html", []).run(["$templateCach
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline.html",
     "<ul class=\"timeline\">\n" +
     "    <li class=\"timeline__item\" ng-if=\"fixture.state.inProgress\">\n" +
@@ -24,12 +24,12 @@ angular.module("templates/sportily/fixture/timeline.html", []).run(["$templateCa
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/assist.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/assist.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/assist.html",
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/foul.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/foul.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/foul.html",
     "<div class=\"event event--foul\"\n" +
     "    ng-class=\"{ 'event--home' : event.entry_id == fixture.details.home_entry.division_entry_id }\">\n" +
@@ -51,29 +51,29 @@ angular.module("templates/sportily/fixture/timeline/foul.html", []).run(["$templ
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/game_finish.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/game_finish.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/game_finish.html",
     "<div class=\"event event--flow\">Full-time</div>\n" +
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/game_pause.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/game_pause.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/game_pause.html",
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/game_resume.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/game_resume.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/game_resume.html",
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/game_start.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/game_start.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/game_start.html",
     "<div class=\"event event--flow\">Face-off</div>\n" +
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/goal.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/goal.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/goal.html",
     "<div class=\"event event--goal\"\n" +
     "    ng-class=\"{ 'event--home' : event.entry_id == fixture.details.home_entry.division_entry_id }\">\n" +
@@ -96,7 +96,7 @@ angular.module("templates/sportily/fixture/timeline/goal.html", []).run(["$templ
     "");
 }]);
 
-angular.module("templates/sportily/fixture/timeline/own_goal.html", []).run(["$templateCache", function($templateCache) {
+angular.module("templates/sportily/fixture/timeline/own_goal.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/timeline/own_goal.html",
     "<div class=\"event event--own_goal\"\n" +
     "    ng-class=\"{ 'event--home' : event.entry_id != fixture.details.home_entry.division_entry_id }\">\n" +
