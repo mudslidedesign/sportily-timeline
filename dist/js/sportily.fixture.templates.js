@@ -1,4 +1,4 @@
-angular.module('sportily.fixture.templates', ['templates/sportily/fixture/scores.html', 'templates/sportily/fixture/timeline.html', 'templates/sportily/fixture/timeline/assist.html', 'templates/sportily/fixture/timeline/foul.html', 'templates/sportily/fixture/timeline/game_finish.html', 'templates/sportily/fixture/timeline/game_pause.html', 'templates/sportily/fixture/timeline/game_resume.html', 'templates/sportily/fixture/timeline/game_start.html', 'templates/sportily/fixture/timeline/goal.html', 'templates/sportily/fixture/timeline/own_goal.html']);
+angular.module('sportily.fixture.templates', ['templates/sportily/fixture/scores.html', 'templates/sportily/fixture/timeline.html', 'templates/sportily/fixture/timeline/assist.html', 'templates/sportily/fixture/timeline/foul.html', 'templates/sportily/fixture/timeline/game_endperiod.html', 'templates/sportily/fixture/timeline/game_finish.html', 'templates/sportily/fixture/timeline/game_pause.html', 'templates/sportily/fixture/timeline/game_resume.html', 'templates/sportily/fixture/timeline/game_start.html', 'templates/sportily/fixture/timeline/goal.html', 'templates/sportily/fixture/timeline/own_goal.html']);
 
 angular.module("templates/sportily/fixture/scores.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("templates/sportily/fixture/scores.html",
@@ -48,6 +48,12 @@ angular.module("templates/sportily/fixture/timeline/foul.html", []).run(["$templ
     "    </div>\n" +
     "    <div delete-event=\"event\" fixture=\"fixture\" name=\"Foul committed by {{:: fixture.participants.lookup[event.participant_id].name | person }}\"></div>\n" +
     "</div>\n" +
+    "");
+}]);
+
+angular.module("templates/sportily/fixture/timeline/game_endperiod.html", []).run(["$templateCache", function ($templateCache) {
+  $templateCache.put("templates/sportily/fixture/timeline/game_endperiod.html",
+    "<div class=\"event event--flow\">End Period</div>\n" +
     "");
 }]);
 
